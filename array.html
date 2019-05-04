@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组</title>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        // var personArray = [
+        //     {name:'陈琳', src:'./', age:'28',sex:'女'},
+        //     {name:'吱吱', src:'./', age:'18',sex:'男'},
+        //     {name:'李晨', src:'./', age:'25',sex:'男'},
+        //     {name:'杨进', src:'./', age:'10',sex:'女'}
+        // ];
+
+        //forEach()
+        // personArray.forEach(function(ele, index, self){
+        //     console.log(ele,index,self,this);
+        //     console.log(this[index]);
+        //     this[index].innerText = ele.name;
+        // },document.getElementsByTagName('li'));
+
+        // 肢解foreach()原型
+        // Array.prototype.myForEach = function(func){
+        //     var _arr = this, len = _arr.length, param2 = arguments[1] || window ;
+        //      for(var i = 0; i < len; i++){
+        //         // func.apply(param2, [_arr[i], i, _arr]);
+        //      }
+        // }
+
+        // personArray.myForEach(function(ele, index, self){
+        //         // console.log(ele,index,self,this);
+        //         this[index].innerText = ele.name;
+        //     },document.getElementsByTagName('li'));
+
+        //Filter()  {name:'cts'}这个是何用意，this指向在这没用啊,忽略
+        // var newArr = personArray.filter(function(ele, index, self){
+        //     console.log(ele, index, self, this);
+        //     return ele.sex == '男';
+        // }, {name:'cts'}); 
+
+        //肢解filter()原型
+        // Array.prototype.myFilter = function(func){
+        //     var _arr = this, len = _arr.length, param2 = arguments[1] || window, newArr = [];
+        //     for(var i = 0; i < len; i++){
+        //         func.apply(param2,[_arr[i], i, _arr]) ? newArr.push(_arr[i]):'';
+        //         // console.log(param2);
+        //     }
+        //     return newArr;
+        // }
+        //  var newArr = personArray.myFilter(function(ele, index, self){
+        //     console.log(ele, index, self, this);
+        //     return ele.sex == '男';
+        // }, {name:'cts'}); 
+
+        // map() 返回新数组，映射 x->y 
+        // var newArr = personArray.map(function(ele,index,self){
+        //     console.log(ele,index,self,this);
+        //      ele.name += 10;
+        //      return ele;
+        // },{name:'haha'});
+
+        //肢解map()原型
+        // Array.prototype.myMap = function(func){
+        //     var _arr = this, len = _arr.length, param2 = arguments[1] || window, newArr = [];
+        //     for(var i = 0; i < len; i++){
+        //         newArr.push(func.apply(param2,[_arr[i], i, _arr]));
+        //     }
+        //     return newArr;
+        // }
+        // var newArr = personArray.myMap(function(ele,index,self){
+        //     // console.log(ele,index,self,this);
+        //     return ele.name + 20;
+        // },{name:'haha'});
+
+        //every() 类似于与相似，必须要都符合才会返回true
+        // var newArr = personArray.every(function(ele,index,self){
+        //     return ele.age > 9;
+        // },{name:'haha'});
+
+        //肢解every()原型
+        // Array.prototype.myEvery = function (func) {
+        //     var _arr = this, len = _arr.length, param2 = arguments[1] || window, flag = true;
+        //     for(var i = 0; i < len; i++){
+        //         if(!func.apply(param2, [_arr[i], i, _arr])){
+        //             flag = false;
+        //             break;
+        //         }
+        //     }
+        //     return flag;
+        // }
+        // var newArr = personArray.myEvery(function(ele,index,self){
+        //     return ele.age > 9;
+        // },{name:'haha'});       
+        
+        
+        
+        // some() 类似于与相似，必须要都符合才会返回true
+        // var newArr = personArray.some(function(ele,index,self){
+        //     return ele.age > 15;
+        // },{name:'haha'});
+
+        //肢解some()原型
+        // Array.prototype.mySome = function (func) {
+        //     var _arr = this, len = _arr.length, param2 = arguments[1] || window, flag = false;
+        //     for(var i = 0; i < len; i++){
+        //         if(func.apply(param2, [_arr[i], i, _arr])){
+        //             flag = true;
+        //             break;
+        //         }
+        //     }
+        //     return flag;
+        // }
+        // var newArr = personArray.mySome(function(ele,index,self){
+        //     return ele.age > 80;
+        // },{name:'haha'});
+
+        var personArray = [
+            {name:'陈琳', src:'./', age:'28',sex:'女'},
+            {name:'吱吱', src:'./', age:'18',sex:'男'},
+            {name:'李晨', src:'./', age:'25',sex:'男'},
+            {name:'杨进', src:'./', age:'10',sex:'女'}
+        ];
+
+        //reduce()返回一个值 从左向右遍历 reduceRight() 从右向左遍历  reduce参数function ：preValue curValue  index self , initialValue(初始值)
+        var cookieStr = "ga=GA1.2.1643523242.1547892244; __gads=ID=d537d0219186cdef:T=1547892243:S=ALNI_Mbav_K6Tg62SQ5sPTUS2JuOK3LbFA; _gid=GA1.2.686716354.1556372181";
+        
+        var initialValue = {name: 'kxh'};
+        // var lastValue = personArray.reduce(function (preValue, curValue, index, self) {
+        //     console.log(preValue, curValue, index, self, this);
+        //     preValue.name += 1;
+        //     return preValue;
+        // }, initialValue, {dom: 'dom'});
+
+        //肢解reduce()原型
+        Array.prototype.myReduce = function (func, initialValue) {
+            var _arr = this, len = _arr.length, param2 = arguments[2] || window, lastValue = [];
+            for(var i = 0; i < len; i++){
+                initialValue = func.apply(param2, [initialValue, _arr[i], i, _arr]);
+                console.log(param2);
+                // lastValue.push(param2);
+            }
+            // return lastValue;
+        }
+        var lastValue = personArray.myReduce(function (preValue, curValue, index, self) {
+            preValue.name += 1;
+            return preValue;
+        }, initialValue, {dom: 'dom'});
+    </script>
+</body>
+</html>

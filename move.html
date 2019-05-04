@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js运动</title>
+    <style>
+    body,div,span,h1,ul,li,a{padding: 0;margin: 0;list-style: none;}
+    h1{text-align: center;}
+    /* div{
+        width:200px;
+        height: 30px;
+        background-color: pink;
+        position: absolute;
+        left: -170px;
+        }
+        span{width: 30px;background: red;height: 30px;position: absolute;right: 0px; } */
+        /* div{
+            position: absolute;
+            width:100px;
+            height: 100px;
+            background-color: brown;
+            opacity: 1;
+        }
+        span{
+            width:1px;
+            height: 100px;
+            position: absolute;
+            left: 500px;
+            background-color: black;
+        }
+        #topDiv{top:200px;}
+        #bottomDiv{top:400px;} */
+        /* ul{
+            width:400px;
+            height: 60px;
+            border: 1px solid #111111;
+            margin: 0 auto;
+            position: relative;
+        }
+        ul .ele{
+            float: left;
+            width:98px;
+            height: 58px;
+            border: 1px solid #f12222;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 58px;
+            background-color: yellow;
+        }
+        .bg{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width:100px;
+            height: 60px;
+            background-color: red;
+            opacity: 0.5;
+        } */
+        div{
+            position: absolute;
+            width:50px;
+            height: 50px;
+            background-color: brown;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="fighting">为7月份换工作而努力，加油，加油，加油！</h1>
+    <!-- <div><span></span></div> -->
+    <!-- <div id = "topDiv"></div>
+    <div id = "bottomDiv"></div> -->
+    <!-- <div></div>
+    <span></span> -->
+    <!-- <ul>
+        <li class="ele">1</li>
+        <li class="ele">2</li>
+        <li class="ele">3</li>
+        <li class="ele">4</li>
+        <li class="bg"></li>
+    </ul> -->
+    <div></div>
+    <script>
+        //模拟重力场
+        // var oDiv = document.getElementsByTagName('div')[0];
+        // var timer =null;
+
+        // oDiv.onclick = function (){
+        //     startMove(this);
+        // }
+
+        // function startMove(dom){
+        //     clearInterval(timer);
+        //     var iSpeedX = 6;
+        //     var iSpeedY = 8;
+        //     var g = 3;
+        //     timer = setInterval(function(){
+        //         iSpeedY += g;
+        //         var newTop = dom.offsetTop + iSpeedY;
+        //         var newLeft = dom.offsetLeft + iSpeedX;
+        //         if(newTop >= document.documentElement.clientHeight - dom.clientHeight){
+        //             iSpeedY *= -1;
+        //             iSpeedX *= 0.8;
+        //             iSpeedY *= 0.8;
+        //             newTop = document.documentElement.clientHeight - dom.clientHeight;
+        //         }
+        //         if(newTop <= 0){
+        //             newTop = 0;
+        //             iSpeedY *= -1;
+        //             iSpeedX *= 0.8;
+        //             iSpeedY *= 0.8;
+        //         }
+        //         if(newLeft >= document.documentElement.clientWidth - dom.clientWidth){
+        //             iSpeedX *= -1;
+        //             iSpeedX *= 0.8;
+        //             iSpeedY *= 0.8;
+        //             newLeft = document.documentElement.clientWidth - dom.clientWidth;
+        //         }
+        //         if(newLeft <= 0){
+        //             newLeft = 0;
+        //             iSpeedX *= -1;
+        //             iSpeedX *= 0.8;
+        //             iSpeedY *= 0.8;
+        //         }
+        //         if(Math.abs(iSpeedX) < 1){
+        //             iSpeedX = 0;
+        //         }
+        //         if(Math.abs(iSpeedY) < 1){
+        //             iSpeedY = 0;
+        //         }
+        //         if(iSpeedX == 0 && iSpeedY == 0 && newTop == document.documentElement.clientHeight - dom.clientHeight){
+        //             clearInterval(timer);
+        //             console.log('over');
+        //         }else{
+        //             dom.style.top = newTop + 'px';
+        //             dom.style.left = newLeft + 'px';
+        //         }
+        //     },30);
+        // }
+
+        //多物体弹性运动
+        // var oLiArray = document.getElementsByClassName('ele');
+        // var oLiBg = document.getElementsByClassName('bg')[0];
+        // var timer = null;
+        // for(var i = 0; i < oLiArray.length; i++){
+        //     oLiArray[i].onmouseenter = function(){
+        //         startMove(oLiBg, this.offsetLeft);
+        //     }
+        // }
+
+        // function startMove(dom, target){
+        //     clearInterval(timer);
+        //     var a = 2;
+        //     var iSpeed = 0;
+        //     var u = 0.8;
+        //     timer = setInterval(function(){
+        //         a = (target - dom.offsetLeft) / 5;
+        //         iSpeed += a;
+        //         iSpeed *= 0.8; 
+        //         // console.log(a);
+        //         if(Math.abs(iSpeed < 1) && Math.abs(target - dom.offsetLeft) < 1){
+        //             clearInterval(timer);
+        //             dom.offsetLeft = target; 
+        //         }else{
+        //             dom.style.left = dom.offsetLeft + iSpeed + 'px';
+        //         }
+        //     },30);
+        // }
+
+
+       //弹性运动  加速减小、加速增大、摩擦力
+        // var oDiv = document.getElementsByTagName('div')[0];
+        // var timer = null;
+        // oDiv.onclick = function(){
+        //     startMove(oDiv,500);
+        // }
+        // function startMove(dom, target){
+        //     clearInterval(timer);
+        //     var a = 2;
+        //     var iSpeed = 0;
+        //     var u = 0.8;
+        //     timer = setInterval(function(){
+        //         a = (target - dom.offsetLeft) / 5;
+        //         iSpeed += a;
+        //         iSpeed *= 0.8; 
+        //         // console.log(a);
+        //         if(Math.abs(iSpeed < 1) && Math.abs(target - dom.offsetLeft) < 1){
+        //             clearInterval(timer);
+        //             dom.offsetLeft = target; 
+        //         }else{
+        //             dom.style.left = dom.offsetLeft + iSpeed + 'px';
+        //         }
+        //     },30);
+        // }
+
+        //多物体多值运动,回调机制callback
+        // var oTopDiv = document.getElementById('topDiv');
+        // var oBottomDiv = document.getElementById('bottomDiv');
+        // var timer = null;
+        // oTopDiv.onclick = function(){
+        //     startMove(this,{width: 400, height: 400, opacity: 50, top:100,left: 100},function(){
+        //         startMove(oBottomDiv,{width: 400, height: 400, opacity: 50, top:100,left: 100},function(){
+        //             alert("调用结束！");
+        //         });
+        //     });
+        // }
+    // function getStyle(dom,attr){
+    //     if(window.getComputedStyle){
+    //         return window.getComputedStyle(dom,null)[attr];
+    //     }else{
+    //         return dom.currentStyle[attr];
+    //     }
+    // }
+
+    // function startMove(dom,attrObj,callback){
+    //     clearInterval(dom.timer);
+    //     var iSpeed = null,iCur = null;
+    //     dom.timer = setInterval(function(){
+    //         var bStop = true;
+    //         for(var attr in attrObj){
+    //             if(attr == 'opacity'){
+    //                 iCur = parseFloat(getStyle(dom,'opacity')) * 100;
+    //             }else{
+    //                 iCur = parseInt(getStyle(dom,attr));
+    //             }
+    //             iSpeed = (attrObj[attr] - iCur) / 7;
+    //             iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+    //             if(iCur == attr){
+    //                 clearInterval(dom.timer);
+    //             }
+    //             if(attr == 'opacity'){
+    //                 dom.style.opacity = (iCur + iSpeed) / 100;
+    //             }else{
+    //                 dom.style[attr] = iCur + iSpeed + 'px';
+    //             }
+    //             if(iCur != attrObj[attr]){
+    //                 bStop = false;
+    //             }
+    //         }
+    //         if(bStop){
+    //             clearInterval(dom.timer);
+    //             typeof callback == 'function' && callback();
+    //         }
+    //     },30);
+    // }
+
+    //多物体单值运动
+    // var oDivArray = document.getElementsByTagName('div');
+    // console.log(oDivArray.length);
+    // var timer = null;
+
+    // oDivArray[0].onclick = function(){
+    //     startMove(this,'width',400);
+    // }
+    // oDivArray[1].onclick = function(){
+    //     startMove(this,'height',400);
+    // }
+    // oDivArray[2].onclick = function(){
+    //     startMove(this,'borderWidth','20');
+    // }
+    // oDivArray[3].onclick = function(){
+    //     startMove(this,'opacity',50);
+    // }
+
+    // function startMove(dom,attr,target){
+    //     clearInterval(dom.timer);
+    //     var iSpeed = null,iCur = null;
+    //     dom.timer = setInterval(function(){
+    //         if(attr == 'opacity'){
+    //             iCur = parseFloat(getStyle(dom,'opacity')) * 100;
+    //         }else{            
+    //             iCur = parseInt(getStyle(dom,attr));
+    //         }
+    //         iSpeed = (target - iCur) / 7;
+    //         iSpeed = iSpeed > 0 ? Math.ceil(iSpeed):Math.floor(iSpeed);
+    //         if(iCur == target){
+    //             clearInterval(dom.timer);
+    //         }
+    //         if(attr =='opacity'){
+    //             dom.style.opacity = (iCur + iSpeed) / 100 ;
+    //         }else{
+    //             dom.style[attr] = iCur + iSpeed +'px';
+    //         }
+    //     },30);
+    // }
+    // for(var i = 0; i < oDivArray.length;i++){
+    //     oDivArray[i].onmouseenter = function(){
+    //     startMove(this,500);
+    // }
+    // oDivArray[i].onmouseleave = function(){
+    //     startMove(this,60)
+    // }
+    // }
+    //绑定点击事件
+    // oDiv.onclick = function () {
+    //     startMove(oDiv,0.5);
+    // }
+    // oDiv.onmouseenter = function(){
+    //     startMove(this,500);
+    // }
+    // oDiv.onmouseleave = function(){
+    //     startMove(this,60)
+    // }
+
+
+    //改变对象的属性opacity
+    // function startMove(dom,target){
+    //     clearInterval(timer);
+    //     var iSpeed = null,iCur = null;
+    //     timer = setInterval(function(){
+    //         iCur = parseFloat(getStyle(dom,'opacity'));
+    //         iSpeed = (target - iCur) / 100;
+    //         if( target - dom.offsetLeft < iSpeed ){
+    //             clearInterval(timer);
+    //         }else{
+    //             dom.style.opacity = (iSpeed + iCur);
+    //         }
+    //     },30);
+    // }
+
+    //改变对象的高度属性
+    // function startMove(dom,target){
+    //     clearInterval(dom.timer);
+    //     var iSpeed = null,iCur = null;
+    //     dom.timer = setInterval(function(){
+    //         iCur = parseInt(getStyle(dom,'width'));
+    //         iSpeed = (target - iCur) / 7;
+    //         iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+    //         if( iCur == target ){
+    //             clearInterval(dom.timer);
+    //         }else{
+    //             dom.style.width = iSpeed + iCur + 'px';
+    //         }
+    //     },30);
+    // }
+
+    //缓冲运动 鼠标进入拉伸 退出隐藏
+    // function startMove(dom,target) {
+    //     clearInterval(timer);
+    //     timer = setInterval(function(){
+    //         var iSpeed = (target - dom.offsetLeft)/7;
+    //         iSpeed = iSpeed > 0 ? Math.ceil(iSpeed):Math.floor(iSpeed);
+    //         if(Math.abs(target - dom.offsetLeft) < Math.abs(iSpeed)){
+    //             clearInterval(timer);
+    //             dom.offsetLeft = target;
+    //         }else{
+    //             dom.style.left = dom.offsetLeft + iSpeed + 'px'; 
+    //         }
+    //     },30);
+    // }
+    //一个做匀(加)速的函数
+    // function startMove(dom,target) {
+    //     clearInterval(timer);
+    //     timer = setInterval(function(){
+    //         var iSpeed = target - dom.offsetLeft > 0 ? 7:-7 ;
+    //         var a = 2;
+    //         iSpeed = iSpeed + a;
+    //         iSpeed = Math.ceil(iSpeed);
+    //         if(Math.abs(target - dom.offsetLeft) < Math.abs(iSpeed)){
+    //             dom.style.left = target;
+    //             clearInterval(timer);
+    //         }else{
+    //             dom.style.left = dom.offsetLeft + iSpeed + 'px';
+    //         }
+    //     },30);
+    // }    
+
+    //缓冲运动
+    // function startMove(dom,target) {
+    //     clearInterval(timer);
+    //     timer = setInterval(function(){
+    //         var iSpeed = (target - dom.offsetLeft)/9 ;
+    //         iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+    //         if(Math.abs(target - dom.offsetLeft) < Math.abs(iSpeed)){
+    //             dom.style.left = target;
+    //             clearInterval(timer);
+    //         }else{
+    //             dom.style.left = dom.offsetLeft + iSpeed + 'px';
+    //         }
+    //     },30);
+    // }
+
+    </script>
+</body>
+</html>
